@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Header from "./layout/header";
+import PrivateRoutes from "./routes/privateRoutes";
+import PublicRoutes from "./routes/publicRoutes";
+import "./App.css";
 
 function App() {
+  const refreshToken = "vvvvvvvvvv";
+
+  const privateRoutes = refreshToken ? PrivateRoutes : [];
+  const publicRoutes = PublicRoutes;
+
+  const routes = [...privateRoutes, ...publicRoutes];
+
+  const router = createBrowserRouter(routes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <RouterProvider router={router} />
+    </>
   );
 }
 
