@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" component="div">
-          Your Header Text
+          ECOMMERCE{" "}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Typography variant="body1" sx={{ marginRight: 2, color: "black" }}>
@@ -44,10 +44,11 @@ const Header: React.FC = () => {
               display: "flex",
               alignItems: "center",
               flexDirection: "row",
-              columnGap: "5px",
+              columnGap: "8px",
             }}
             mt={1}
           >
+            <span>Help ! </span>
             <span>Himanshu</span>
             <span>Orders</span>
           </Box>

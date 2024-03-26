@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
 
 interface SignInProps {
   onSubmit: (formData: any) => void;
@@ -19,8 +21,37 @@ const SignIn: React.FC<SignInProps> = ({ onSubmit }) => {
 
   return (
     <div>
+      <Typography
+        textAlign={"center"}
+        fontWeight={600}
+        variant="h4"
+        gutterBottom
+      >
+        Sign In
+      </Typography>
+
+      <Typography
+        textAlign={"center"}
+        fontWeight={400}
+        variant="h6"
+        gutterBottom
+      >
+        Welcome back to ECOMMERCE
+      </Typography>
+      <Typography
+        textAlign={"center"}
+        fontWeight={400}
+        variant="body1"
+        gutterBottom
+      >
+        The next gen business marketplace
+      </Typography>
+
+      <Typography mt={1} mb={1} variant="subtitle1">
+        Username
+      </Typography>
       <TextField
-        label="Username"
+        size="small"
         variant="outlined"
         fullWidth
         name="username"
@@ -28,8 +59,11 @@ const SignIn: React.FC<SignInProps> = ({ onSubmit }) => {
         onChange={handleChange}
         className="mt-10"
       />
+      <Typography mt={1} mb={1} variant="subtitle1">
+        Password
+      </Typography>
       <TextField
-        label="Password"
+        size="small"
         type="password"
         variant="outlined"
         fullWidth
@@ -38,15 +72,19 @@ const SignIn: React.FC<SignInProps> = ({ onSubmit }) => {
         onChange={handleChange}
         className="mt-10"
       />
-      <Button
-        className="mt-10"
-        variant="contained"
-        color="primary"
-        fullWidth
-        onClick={handleSubmit}
-      >
-        Sign In
-      </Button>
+      <Box marginTop={"20px"}>
+        {" "}
+        <Button
+          className="mt-10"
+          variant="contained"
+          color="primary"
+          sx={{ backgroundColor: "black" }}
+          fullWidth
+          onClick={handleSubmit}
+        >
+          Sign In
+        </Button>
+      </Box>
     </div>
   );
 };

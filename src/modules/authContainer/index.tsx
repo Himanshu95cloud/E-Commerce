@@ -1,64 +1,91 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import SignIn from "./signIn";
 import SignUp from "./signUp";
 import OfferComponent from "../../common/offerSlider";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const AuthContainer: React.FC = () => {
   const [activeAction, setActiveAction] = useState<"signIn" | "signUp">(
-    "signIn"
+    "signUp"
   );
-
-  const handleChange = (
-    event: React.SyntheticEvent,
-    newValue: "signIn" | "signUp"
-  ) => {
-    setActiveAction(newValue);
+  const navigate = useNavigate();
+  const handleSwitchAction = () => {
+    setActiveAction(activeAction === "signIn" ? "signUp" : "signIn");
   };
 
   const handleSignIn = (formData: any) => {
     console.log("Signing In with data:", formData);
-    // Implement your sign-in logic here
   };
 
   const handleSignUp = (formData: any) => {
     console.log("Signing Up with data:", formData);
-    // Implement your sign-up logic here
+
+    const isValid = true;
+    if (isValid) {
+      navigate("/email-verification");
+    }
   };
+
   const offerText = [
     "10% off for business Signup",
     "20% off for Wholesale Signup",
   ];
+
   return (
     <>
       <OfferComponent offerText={offerText} />
       <Box
-        sx={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "50px",
+        }}
       >
-        <Box
-          sx={{
-            width: "400px",
-            border: "1px solid black",
-            borderRadius: "5px",
-          }}
-        >
-          <Tabs
-            value={activeAction}
-            onChange={handleChange}
-            centered
-            indicatorColor="primary"
-            textColor="primary"
+        {activeAction === "signIn" && (
+          <Box
+            minWidth={"20vw"}
+            padding={3}
+            border={"1px solid grey"}
+            borderRadius={"8px"}
           >
-            <Tab label="Sign In" value="signIn" />
-            <Tab label="Sign Up" value="signUp" />
-          </Tabs>
-          <Box sx={{ padding: "20px" }}>
-            {activeAction === "signIn" && <SignIn onSubmit={handleSignIn} />}
-            {activeAction === "signUp" && <SignUp onSubmit={handleSignUp} />}
+            <SignIn onSubmit={handleSignIn} />
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{ marginTop: "10px" }}
+            >
+              <span style={{ color: "grey" }}>Not a member? </span>
+              <Button sx={{ color: "black" }} onClick={handleSwitchAction}>
+                Sign Up
+              </Button>
+            </Box>
           </Box>
-        </Box>
+        )}
+        {activeAction === "signUp" && (
+          <Box
+            minWidth={"20vw"}
+            padding={3}
+            border={"1px solid grey"}
+            borderRadius={"8px"}
+          >
+            <SignUp onSubmit={handleSignUp} />
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{ marginTop: "10px" }}
+            >
+              <span style={{ color: "grey" }}>Already a member? </span>
+              <Button sx={{ color: "black" }} onClick={handleSwitchAction}>
+                Sign In
+              </Button>
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   );
