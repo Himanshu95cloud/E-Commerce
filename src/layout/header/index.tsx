@@ -6,17 +6,17 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
-          onClick={() => {
-            navigate("/");
-          }}
+          // onClick={() => {
+          //   navigate("/");
+          // }}
           variant="h6"
           component="div"
         >
