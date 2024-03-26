@@ -4,12 +4,12 @@ import AuthPage from "../pages/auth";
 
 const PublicRoutes: RouteObject[] = [
   {
-    path: "login",
+    path: "authentication",
     element: <AuthPage />,
   },
   {
     path: "*",
-    element: <Navigate to="/login" replace />,
+    element: <Navigate to="/authentication" replace />,
   },
 ];
 
