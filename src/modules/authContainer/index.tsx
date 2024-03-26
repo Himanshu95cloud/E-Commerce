@@ -22,9 +22,18 @@ const AuthContainer: React.FC = () => {
   const handleSignUp = (formData: any) => {
     console.log("Signing Up with data:", formData);
 
-    const isValid = true;
-    if (isValid) {
+    // Validate form data
+    if (
+      formData.username &&
+      formData.email &&
+      formData.password &&
+      formData.confirmPassword
+    ) {
+      // Proceed with redirection if all fields are filled
       navigate("/email-verification");
+    } else {
+      // Display an error message or perform any other action for invalid data
+      console.error("Please fill in all the required fields");
     }
   };
 

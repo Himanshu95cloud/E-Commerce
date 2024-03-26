@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const EmailVerification: React.FC = () => {
   const navigate = useNavigate();
-  const [verificationCode, setVerificationCode] = useState("");
+  const [verificationCode, setVerificationCode] = useState(Array(6).fill(""));
+  const [verificationError, setVerificationError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -15,14 +16,22 @@ const EmailVerification: React.FC = () => {
   ) => {
     const value = e.target.value;
     if (value.length <= 1) {
-      const newCode = verificationCode.split("");
+      const newCode = [...verificationCode];
       newCode[index] = value;
-      setVerificationCode(newCode.join(""));
+      setVerificationCode(newCode);
+      setVerificationError(""); // Clear error message when input changes
     }
   };
 
   const handleSubmit = () => {
-    navigate("/shopping-intrest");
+    // Check if all verification code fields are filled
+    const isCodeFilled = verificationCode.every((code) => code.length === 1);
+
+    if (isCodeFilled) {
+      navigate("/shopping-intrest");
+    } else {
+      setVerificationError("Please fill in all the verification code fields.");
+    }
   };
 
   return (
@@ -54,20 +63,25 @@ const EmailVerification: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          {[...Array(6)].map((_, index) => (
+          {verificationCode.map((code, index) => (
             <TextField
               size="small"
               key={index}
               variant="outlined"
               inputProps={{ maxLength: 1 }}
               style={{ marginRight: "8px", width: "40px" }}
-              value={verificationCode[index] || ""}
+              value={code}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange(e, index)
               }
             />
           ))}
         </div>
+        {verificationError && (
+          <Typography variant="body2" color="error" align="center">
+            {verificationError}
+          </Typography>
+        )}
         <Button
           variant="contained"
           color="primary"

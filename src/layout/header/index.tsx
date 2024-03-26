@@ -52,7 +52,7 @@ const Header: React.FC = () => {
             <span>Himanshu</span>
             <span>Orders</span>
           </Box>
-          <Box>
+          <Box display={"flex"} justifyContent={"flex-end"}>
             <IconButton color="inherit">
               <SearchIcon />
             </IconButton>
